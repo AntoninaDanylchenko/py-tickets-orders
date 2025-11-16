@@ -129,16 +129,9 @@ class MovieSessionViewSet(viewsets.ModelViewSet):
         return queryset.distinct()
 
 
-class OrderSetPagination(PageNumberPagination):
-    page_size = 3
-    page_size_query_param = "page_size"
-    max_page_size = 20
-
-
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    pagination_class = OrderSetPagination
 
     def get_queryset(self) -> QuerySet:
         queryset = self.queryset.filter(user=self.request.user)
